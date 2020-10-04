@@ -1,0 +1,2 @@
+- When we start android app, we have one single thread by default. It is called main thread.
+- There is another thread called UIThread which is responsible for managing and updating user interface
