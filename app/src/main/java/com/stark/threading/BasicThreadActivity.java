@@ -9,7 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class BasicThreadActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private Button buttonStartThread;
 

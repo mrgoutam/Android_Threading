@@ -1,20 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".BasicThreadActivity">
-
-    <Switch
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp" />
+    tools:context=".LooperMsgQHandlerActivity">
 
     <Button
-        android:id="@+id/button_start_thread"
+        android:id="@+id/button_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="startThread"
@@ -25,11 +19,17 @@
         android:layout_height="wrap_content"
         android:onClick="stopThread"
         android:text="Stop" />
-    <TextView
-        android:layout_width="match_parent"
+
+    <Button
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Note: Concept is inside code"
-        android:textStyle="italic"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="10dp"/>
+        android:onClick="taskA"
+        android:text="Task A" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="taskB"
+        android:text="Task B" />
+
 </LinearLayout>
