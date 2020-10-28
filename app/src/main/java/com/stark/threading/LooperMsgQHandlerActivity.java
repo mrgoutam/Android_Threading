@@ -48,6 +48,54 @@ public class LooperMsgQHandlerActivity extends AppCompatActivity {
 
 
 /*
+================================THEORY====================================
+                   Thread
+                   start()
+                     |
+                     |
+              run()  |  [] <- job
+                     |
+                     |
+                   terminate
+
+ - By default a thread start, execute some work and terminate. After the termination, we can't use the same thread again.
+   We have to initiate new one.
+ - This doesn't seem to be the case of UI thread and also called main thread. Because after our app started main doesn't
+   just terminated even it doesn't have any work to do. It seems to wait for new input for example we click a button and
+   do something or perform any other work on it.
+ - The mechanism that keeps the thread alive is called Message Queue.
+
+                    Thread
+                   start()
+                     |  []  <- Message Queue
+                     |  []   /'''\
+              run()  |  []  |     |
+                     |  []  |     | Looper
+                     |  []   \.../
+                   terminate
+
+- Instead of just one peace of work, it has lot of work to execute. one after another. And there is something called Looper
+  which loops through this Message Queue and dispatches messages sequentially.
+- Looper is basically just a infinite for loop. Unless we create a purpose we don't leave this loop. This way we never reach
+  to the bottom(means termination).
+- Handler which is responsible for getting the package of work into Message Queue. In the background thread example
+  we post message into the message queue of UI Thread.
+  Handler cannot only put message at the start and end instead we can also specify time or dely and this way change the
+  order of messages.
+- Looper loops through message queue. It tooks the message which has time now or already in past and it dispatches the piece of work
+  to the handler. Handler has two responsibility. Handler not only put message in queue but also execute it and the looper
+  go for a next round and handover the piece of work to handler.
+
+- If there is no message in the queue that is to be executed right now, then this thread blocks and wait until the message
+  hits the time barrier.
+- When we quit this looper, we leave infinite for loop and then we execute whatever come below it and then thread terminates
+  just like a normal java thread.
+- Thread is java specific but Message Queue and Handler are android specific. They belong to the android framework.
+  However the concept of loop is not specific to the android. Because we always need something to keep the thread active.
+- We can turn a java thread into such a looper thread with a Message Queue. This is the whole concept behind the HandlerThread
+  class
+
+
 CASE I:
 We are going to create a looper thread called ExampleLooperThread.java.
 Now it is not a looper but just a thread
@@ -160,19 +208,7 @@ If we try to post another task through handler by click taskA we get error messa
 Error message is "IllegalStateException: Handler (android.os.Handler) {6851386} sending message to a Handler on a dead thread"
 However if we try to start thread again by click startThread(), app will crash
 
-
-================================THEORY====================================
-                   Thread
-                   start()
-                     |  []  <- Message Queue
-                     |  []
-              run()  |  []
-                     |  []
-                     |  []
-                   terminate
-
- - By default a thread start, execute some work and terminate. After the termination, we can't use the same thread again.
-   We have to initiate new one.
- - This doesn't seem to be the case of UI thread and also called main thread.
+CASE V:
+14 minutes
 ========================END===============================================
 */
