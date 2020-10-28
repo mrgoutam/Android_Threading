@@ -1,22 +1,22 @@
 package com.stark.threading;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.os.SystemClock;
 import android.util.Log;
 
 public class ExampleLooperThread extends Thread {
     private static final String TAG = "ExampleLooperThread";
-//https://www.youtube.com/watch?v=TN-CGfzvBhc&list=PLrnPJCHvNZuD52mtV8NvazNYIyIVPVZRa&index=2
-    // 7:36
+
+    public Handler handler;
     @Override
     public void run() {
-        for (int i = 0; i <5 ; i++) {
-            Log.d(TAG, "run: "+i);
+        Looper.prepare();
 
-            /*
-            - Unlike Thread.sleep, we don't need try-catch because it is internally built
-             */
-            SystemClock.sleep(1000);
-        }
-        Log.d(TAG, "End of run");
+        handler = new Handler();
+
+        Looper.loop(); // this is a infinite for loop
+
+        Log.d(TAG, "End of run()");
     }
 }
