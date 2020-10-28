@@ -9,9 +9,12 @@ public class ExampleLooperThread extends Thread {
     private static final String TAG = "ExampleLooperThread";
 
     public Handler handler;
+    public Looper looper;
     @Override
     public void run() {
         Looper.prepare();
+
+        looper = Looper.myLooper();
 
         handler = new Handler();
 

@@ -2,6 +2,7 @@ package com.stark.threading;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
@@ -21,6 +22,9 @@ public class LooperMsgQHandlerActivity extends AppCompatActivity {
     }
 
     public void stopThread(View view) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            looperThread.looper.quitSafely();
+        }
     }
 
     public void taskA(View view) {
@@ -132,6 +136,29 @@ after click startThread, if we click taskA
 if we click taskA twice, it executes taskA method two times.
 Means after finish of taskA if we click taskA again it executes taskA.
 handler puts the task in the messageQ and dispatched by Looper.
+
+CASE IV:
+Quiting the looper
+
+    public Looper looper; //inside ExampleLooperThread.java
+    public void run() {
+            Looper.prepare();
+            looper = Looper.myLooper();
+            handler = new Handler();
+            Looper.loop(); // this is a infinite for loop
+
+            Log.d(TAG, "End of run()");
+    }
+
+    public void stopThread(View view) {
+        looperThread.looper.quitSafely();
+    }
+
+on click on stopThread
+- looper quits means come out from infinite loop and then "Log.d(TAG, "End of run()"); " executes
+If we try to post another task through handler by click taskA we get error message but app will not crash
+Error message is "IllegalStateException: Handler (android.os.Handler) {6851386} sending message to a Handler on a dead thread"
+However if we try to start thread again by click startThread(), app will crash
 
 
 ================================THEORY====================================
