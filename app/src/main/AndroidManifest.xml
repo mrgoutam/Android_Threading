@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LooperMsgQHandlerActivity"></activity>
+        <activity android:name=".HandlerThreadActivity"></activity>
+        <activity android:name=".LooperMsgQHandlerActivity" />
         <activity android:name=".BasicThreadActivity" />
         <activity android:name=".HomeActivity">
             <intent-filter>

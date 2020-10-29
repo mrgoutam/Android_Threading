@@ -21,4 +21,8 @@ public class HomeActivity extends AppCompatActivity {
     public void looperMsgQHanThread(View view) {
         startActivity(new Intent(HomeActivity.this, LooperMsgQHandlerActivity.class));
     }
+
+    public void handlerThread(View view) {
+        startActivity(new Intent(HomeActivity.this, HandlerThreadActivity.class));
+    }
 }
