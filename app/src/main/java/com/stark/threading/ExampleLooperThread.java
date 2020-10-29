@@ -12,14 +12,18 @@ public class ExampleLooperThread extends Thread {
     public Looper looper;
     @Override
     public void run() {
-        Looper.prepare();
 
+        /*Looper.prepare();
         looper = Looper.myLooper();
-
         handler = new Handler();
-
         Looper.loop(); // this is a infinite for loop
+        Log.d(TAG, "End of run()");*/
 
+        //case vi
+        Looper.prepare();
+        looper = Looper.myLooper();
+        handler = new ExampleHandler();
+        Looper.loop(); // this is a infinite for loop
         Log.d(TAG, "End of run()");
     }
 }

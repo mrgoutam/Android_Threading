@@ -4,9 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Message;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
+
+import static com.stark.threading.ExampleHandler.TASK_A;
+import static com.stark.threading.ExampleHandler.TASK_B;
 
 public class LooperMsgQHandlerActivity extends AppCompatActivity {
     private static final String TAG = "LooperMsgQHandlerActivi";
@@ -28,7 +32,7 @@ public class LooperMsgQHandlerActivity extends AppCompatActivity {
     }
 
     public void taskA(View view) {
-        looperThread.handler.post(new Runnable() {
+        /*looperThread.handler.post(new Runnable() {
             @Override
             public void run() {
                 for (int i = 0; i <5 ; i++) {
@@ -36,11 +40,19 @@ public class LooperMsgQHandlerActivity extends AppCompatActivity {
                     SystemClock.sleep(1000);
                 }
             }
-        });
+        });*/
+
+        //case vi
+        Message message = Message.obtain();
+        message.what = TASK_A;
+        looperThread.handler.sendMessage(message);
     }
 
     public void taskB(View view) {
-
+        //case vi
+        Message message = Message.obtain();
+        message.what = TASK_B;
+        looperThread.handler.sendMessage(message);
     }
 }
 
@@ -236,6 +248,7 @@ leaked. One way to fix this is make this runnable a static inner class. Since it
 reference to the activity. Means inside this static class we cannot access any activity variables any more.
 If we need to access activity variable we can use Weak Reference.
 
-
+case VI:
+Instead of posting runnable we can also post message directly using message object.
 ========================END===============================================
 */
