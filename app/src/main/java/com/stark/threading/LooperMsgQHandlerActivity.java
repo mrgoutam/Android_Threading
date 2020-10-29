@@ -209,6 +209,33 @@ Error message is "IllegalStateException: Handler (android.os.Handler) {6851386} 
 However if we try to start thread again by click startThread(), app will crash
 
 CASE V:
-14 minutes
+Below code inside taskA()
+new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i <5 ; i++) {
+                    Log.d(TAG, "run: "+i);
+                    SystemClock.sleep(1000);
+                }
+            }
+    });
+
+It introduces a potentially memory leak and anonymous inner classes is basically the same non-static inner class.
+This non-static inner classes have a reference to the outer class. So, our Runnable class has a reference to our
+activity (LooperMsgQHandlerActivity.class) where we can access activity variables inside runnable. This is called
+implicit reference because we don't need an activity variable for it. And as long as we have reference to the activity,
+the activity can't be garbase collected.
+
+Now think what happanned when our activity destroyed and our thread is still running?
+So we are inside for loop in taskA. Now we rotate our device. Then We go through a destroyer and But the activity cannot be
+destroyed. Because system can only clean an object if it has no reference to it. But our Runnable has already reference
+to our activity. So, as long as our runnable is running our activity can't be cleaned up. And this runnable and thread
+inner classes can be caused for memory leak specially when u used in activity. Leaking of activity is bad because activity
+on the other hand is referenced of other stuff like UI component and other hairarchy. Therefor all of the hairarchy are
+leaked. One way to fix this is make this runnable a static inner class. Since it is static, it doesn't have any
+reference to the activity. Means inside this static class we cannot access any activity variables any more.
+If we need to access activity variable we can use Weak Reference.
+
+
 ========================END===============================================
 */
