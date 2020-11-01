@@ -3,22 +3,73 @@ package com.stark.threading;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Message;
+import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
 
+import static com.stark.threading.ExampleHandlerThread.EXAMPLE_TASK;
+
 public class HandlerThreadActivity extends AppCompatActivity {
+    private static final String TAG = "HandlerThreadActivity";
+
+    private ExampleHandlerThread handlerThread = new ExampleHandlerThread();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_handler_thread);
+
+        handlerThread.start();
     }
 
     public void doWork(View view) {
+        Message message = Message.obtain();
+        message.what = EXAMPLE_TASK;
+        message.arg1 = 23;
+        message.obj = "Object String";
+        //message.setData();
 
+        handlerThread.getHandler().sendMessage(message);
+        //handlerThread.getHandler().sendEmptyMessage(1);
+
+        //handlerThread.getHandler().post(new ExampleRunnable1());
+        //handlerThread.getHandler().post(new ExampleRunnable1());
+        //handlerThread.getHandler().postAtFrontOfQueue(new ExampleRunnable2());
     }
 
     public void removeMessages(View view) {
+        handlerThread.getHandler().removeMessages(EXAMPLE_TASK);
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        //to avoid memory leak
+        handlerThread.quit();
+    }
+
+    static class ExampleRunnable1 implements Runnable{
+        @Override
+        public void run() {
+            for (int i = 0; i <4 ; i++) {
+                Log.d(TAG, "Runnable1: "+i);
+                SystemClock.sleep(1000);
+            }
+        }
+    }
+
+    static class ExampleRunnable2 implements Runnable{
+        @Override
+        public void run() {
+            for (int i = 0; i <4 ; i++) {
+                Log.d(TAG, "Runnable2: "+i);
+                SystemClock.sleep(1000);
+            }
+        }
     }
 }
 
