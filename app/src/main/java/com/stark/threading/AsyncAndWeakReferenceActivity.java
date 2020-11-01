@@ -119,6 +119,29 @@ Execution Order:
  onProgressUpdate(Progress...)   <----  publishProgress(Progress...)   <----  doInBackground(Params...)
  onPostExecute(Result)  <--------------------------------------------------------------------
 
+Why AsyncTask?
+If our app deals with the data loading from internet or doing any other task which can take time and you are using the main
+thread to execute the operations of that task then it introduces a lot of load on the main UI thread and we cannot perform
+any other operation. The UI will freeze.
 
+Therefore, AsyncTask came into existence so that the load of doing such things is reduces on the main UI thread and pushed to
+background thread. When the task is completed the result will published to the main UI thread by calling onPostExecute().
+
+Why should AsyncTask be used ideally for small operations?
+As you may have seen that 3 methods in AsyncTask run on main UI thread and only two (including publishProgress) method run on
+the background thread. This type of working can block the main UI thread even though the task to be performed is being done in
+the background. Let me explain...
+    If your app is loading something from the internet through a network request where the area in which the smartphone is
+    being used has a slow internet connection due to any reason and your user presses the refresh button then another
+    AsyncTask will be created and the methods of that AsyncTask would also run on the main thread but they won’t be able
+    to run it since there is already an AsyncTask running and the onPreExecute() method of the second AsyncTask will not
+    be invoked on the main thread until the previous AsyncTask is done with it’s work and onPostExecute() is called, hence
+    blocking all other methods in the application used to respond to user clicks or any other functionality, hence freezing
+    the app.
+If you want to perform long operations in the background then you can use other classes like Executor, ThreadPoolExecutor and
+FutureTask.
+
+WEAK REFERENCE:
+--coming soon.
 ========================End================================================
  */
