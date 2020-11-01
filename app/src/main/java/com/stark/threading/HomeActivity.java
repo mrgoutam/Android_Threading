@@ -25,4 +25,8 @@ public class HomeActivity extends AppCompatActivity {
     public void handlerThread(View view) {
         startActivity(new Intent(HomeActivity.this, HandlerThreadActivity.class));
     }
+
+    public void asyncAndWeakReference(View view) {
+        startActivity(new Intent(HomeActivity.this, AsyncAndWeakReferenceActivity.class));
+    }
 }

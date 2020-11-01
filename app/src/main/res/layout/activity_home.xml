@@ -33,4 +33,10 @@
         android:text="HandlerThread"
         android:textAllCaps="false"
         android:onClick="handlerThread"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="AsyncTask + Weak Reference"
+        android:textAllCaps="false"
+        android:onClick="asyncAndWeakReference"/>
 </LinearLayout>
