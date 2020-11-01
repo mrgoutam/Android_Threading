@@ -76,9 +76,8 @@ public class AsyncAndWeakReferenceActivity extends AppCompatActivity {
     }
 }
 
-//https://medium.com/@trishantsharma1997/asynctask-in-android-f594a565d676
 /*
-========================Theory=============================================
+========================Theory of AsyncTask=============================================
 INTRODUCTION:
 AsyncTask is an abstract class which means that the class extending it need to implement the below mentioned methods and
 also since the class is generic type the class extending it should specify these 3 generic types
@@ -140,8 +139,109 @@ the background. Let me explain...
     the app.
 If you want to perform long operations in the background then you can use other classes like Executor, ThreadPoolExecutor and
 FutureTask.
+========================End================================================
+ */
+/*
+https://medium.com/google-developer-experts/finally-understanding-how-references-work-in-android-and-java-26a0d9c92f83
+========================Theory of Weak Reference===========================
+A Reference is the direction of an object that is annotated, so you can access it.
 
-WEAK REFERENCE:
---coming soon.
+Java has by default 4 types of references:
+    1. Strong
+    2. Soft
+    3. Weak
+    4. Phantom
+
+Strong Reference:
+    Strong References are the ordinary references in java. Anytime we create a new object, a strong reference is by default
+    created. For example, when we do
+            MyObject object = new MyObject();
+    A new object MyObject is created, and a strong reference to it is stored in object. This object is strongly reachable -
+    that means it can be reached through a chain of strong references. That will prevent the Garbage collector of picking it up
+    and destroy it, which is what we mostly want. But now, let's see an example where this can play against us.
+
+public class MainActivity extends Activity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+        new MyAsyncTask().execute();
+    }
+
+    private class MyAsyncTask extends AsyncTask {
+        @Override
+        protected Object doInBackground(Object[] params) {
+            return doSomeStuff();
+        }
+
+        private Object doSomeStuff() {
+            //do something to get result
+            return new MyObject();
+        }
+    }
+}
+
+    The AsyncTask will be created and executed together with the Activity onCreate() method. But here we have a problem:
+    the inner class needs to be accessing the outside class during its entire lifetime.
+
+    What happens when the Activity is destroyed? The AsyncTask is holding a reference to the Activity, and the Activity
+    cannot be collected by the GC. This is what we called a memory leak.
+
+    The memory leak actually happens not only when the Activity is destroyed per-se, but as well when it is forcibly
+    destroyed by the system due to a change in the configuration or more memory is needed, etc. If the AsyncTask is
+    complex (i.e., keeps references to Views in the Activity, etc) it could even lead to crashes, since the view references
+    are null.
+
+    So how can prevent this problem from ever happening again? Let´s explain the other type of references:
+
+Weak Reference:
+    a weak reference is a reference not strong enough to keep the object in memory. If we try to determine if the object
+    is strongly referenced and it happened to be through WeakReferences, the object will be garbage-collected
+
+public class MainActivity extends Activity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        new MyAsyncTask(this).execute();
+    }
+    private static class MyAsyncTask extends AsyncTask {
+        private WeakReference<MainActivity> mainActivity;
+
+        public MyAsyncTask(MainActivity mainActivity) {
+            this.mainActivity = new WeakReference<>(mainActivity);
+        }
+        @Override
+        protected Object doInBackground(Object[] params) {
+            return doSomeStuff();
+        }
+        private Object doSomeStuff() {
+            //do something to get result
+            return new Object();
+        }
+        @Override
+        protected void onPostExecute(Object object) {
+            super.onPostExecute(object);
+            if (mainActivity.get() != null){
+                //adapt contents
+            }
+        }
+    }
+}
+
+    the Activity within the inner class is now referenced as follows:
+
+    private WeakReference<MainActivity> mainActivity;
+
+    What will happen here? When the Activity stops existing, since it is hold through the means of a WeakReference,
+    it can be Garbage Collected. Therefore no memory leaks will happen.
+
+Soft Reference:
+    Think of a SoftReference as a stronger WeakReference. Whereas a WeakReference will be collected immediately,
+    a SoftReference will beg to the GC to stay in memory unless there is no other option. If the object is a SoftReference,
+    GC will decide what to do based on the ecosystem conditions”. This makes a SoftReference very useful for the
+    implementation of a cache: as long as the memory is plenty, we do not have to worry of manually removing objects.
+
+Phantom Reference:
+    ?
 ========================End================================================
  */
