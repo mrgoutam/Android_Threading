@@ -20,4 +20,8 @@ public class BroadcastReceiverActivity extends AppCompatActivity {
     public void staticBCReceiver(View view) {
         startActivity(new Intent(this, StaticBroadcastReceiverActivity.class));
     }
+
+    public void dynamicBCReceiver(View view) {
+        startActivity(new Intent(this, DynamicBroadcastReceiverActivity.class));
+    }
 }

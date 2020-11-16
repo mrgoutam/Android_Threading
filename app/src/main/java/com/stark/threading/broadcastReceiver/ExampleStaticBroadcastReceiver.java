@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.widget.Toast;
 
-public class ExampleBroadcastReceiver extends BroadcastReceiver {
+public class ExampleStaticBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {

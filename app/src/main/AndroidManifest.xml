@@ -2,7 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.stark.threading">
 
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!--
+    DynamicBroadcastReceiverActivity
+    comment this only for Dynamic Broadcast
+    -->
+    <!--<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />-->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
@@ -14,7 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".broadcastReceiver.StaticBroadcastReceiverActivity"/>
+        <activity android:name=".broadcastReceiver.DynamicBroadcastReceiverActivity"/>
+        <activity android:name=".broadcastReceiver.StaticBroadcastReceiverActivity" />
         <activity android:name=".broadcastReceiver.BroadcastReceiverActivity" />
         <activity android:name=".service_background.JobIntentServiceActivity" />
         <activity android:name=".service_background.IntentServiceActivity" />
@@ -41,11 +46,17 @@
         <service
             android:name=".service_background.ExampleJobIntentService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
-        <receiver android:name=".broadcastReceiver.ExampleBroadcastReceiver">
+
+        <!--
+        DynamicBroadcastReceiverActivity
+        comment this only for Dynamic Broadcast
+        -->
+        <!--<receiver android:name=".broadcastReceiver.ExampleStaticBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
-        </receiver>
+        </receiver>-->
     </application>
+
 </manifest>

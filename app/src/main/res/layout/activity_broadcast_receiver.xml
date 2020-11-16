@@ -13,4 +13,11 @@
         android:text="Static Receiver"
         android:textAllCaps="false"
         android:onClick="staticBCReceiver"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dynamic Receiver"
+        android:textAllCaps="false"
+        android:onClick="dynamicBCReceiver"/>
 </LinearLayout>
