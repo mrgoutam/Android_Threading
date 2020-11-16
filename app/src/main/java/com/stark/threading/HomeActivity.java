@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.stark.threading.service_background.ServicesAndBackgroundTask;
+
 public class HomeActivity extends AppCompatActivity {
 
     @Override
@@ -28,5 +30,9 @@ public class HomeActivity extends AppCompatActivity {
 
     public void asyncAndWeakReference(View view) {
         startActivity(new Intent(HomeActivity.this, AsyncAndWeakReferenceActivity.class));
+    }
+
+    public void servicesAndBackgroundTask(View view) {
+        startActivity(new Intent(HomeActivity.this, ServicesAndBackgroundTask.class));
     }
 }

@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.stark.threading">
 
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AsyncAndWeakReferenceActivity"></activity>
+        <activity android:name=".service_background.ServicesAndBackgroundTask"/>
+        <activity android:name=".AsyncAndWeakReferenceActivity" />
         <activity android:name=".HandlerThreadActivity" />
         <activity android:name=".LooperMsgQHandlerActivity" />
         <activity android:name=".BasicThreadActivity" />
@@ -20,6 +22,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service android:name=".service_background.ExampleJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
     </application>
 
 </manifest>
