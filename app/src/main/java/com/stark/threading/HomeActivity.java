@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.stark.threading.broadcastReceiver.BroadcastReceiverActivity;
 import com.stark.threading.service_background.JobServiceActivity;
 import com.stark.threading.service_background.ServicesAndBackgroundActivity;
 
@@ -35,5 +36,9 @@ public class HomeActivity extends AppCompatActivity {
 
     public void servicesAndBackgroundTask(View view) {
         startActivity(new Intent(HomeActivity.this, ServicesAndBackgroundActivity.class));
+    }
+
+    public void broadcastReceiver(View view) {
+        startActivity(new Intent(HomeActivity.this, BroadcastReceiverActivity.class));
     }
 }

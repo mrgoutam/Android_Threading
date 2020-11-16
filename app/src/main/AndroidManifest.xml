@@ -14,7 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".service_background.JobIntentServiceActivity"/>
+        <activity android:name=".broadcastReceiver.StaticBroadcastReceiverActivity"/>
+        <activity android:name=".broadcastReceiver.BroadcastReceiverActivity" />
+        <activity android:name=".service_background.JobIntentServiceActivity" />
         <activity android:name=".service_background.IntentServiceActivity" />
         <activity android:name=".service_background.ForegroundServiceActivity" />
         <activity android:name=".service_background.ServicesAndBackgroundActivity" />
@@ -39,6 +41,11 @@
         <service
             android:name=".service_background.ExampleJobIntentService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
+        <receiver android:name=".broadcastReceiver.ExampleBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
     </application>
-
 </manifest>
