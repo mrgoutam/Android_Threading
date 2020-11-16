@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
-import android.app.job.JobService;
 import android.content.ComponentName;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,14 +11,14 @@ import android.view.View;
 
 import com.stark.threading.R;
 
-public class ServicesAndBackgroundTask extends AppCompatActivity {
+public class JobServiceActivity extends AppCompatActivity {
     private static final String TAG = "ExampleJobService";
     public static final int JOB_ID = 123;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_services_and_background_task);
+        setContentView(R.layout.activity_job_services);
         setTitle("Services and Background Task");
     }
 

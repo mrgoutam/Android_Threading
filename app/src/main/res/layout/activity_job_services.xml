@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="com.stark.threading.service_background.ServicesAndBackgroundTask">
+    tools:context="com.stark.threading.service_background.JobServiceActivity">
 
     <Button
         android:layout_width="wrap_content"
