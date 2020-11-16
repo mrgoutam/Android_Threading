@@ -26,4 +26,10 @@
         android:text="Intent Service"
         android:textAllCaps="false"
         android:onClick="intentService"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Job Intent Service"
+        android:textAllCaps="false"
+        android:onClick="jobIntentService"/>
 </LinearLayout>

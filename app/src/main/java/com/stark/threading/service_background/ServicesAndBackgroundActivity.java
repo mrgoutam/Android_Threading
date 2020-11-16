@@ -27,4 +27,8 @@ public class ServicesAndBackgroundActivity extends AppCompatActivity {
     public void intentService(View view) {
         startActivity(new Intent(this, IntentServiceActivity.class));
     }
+
+    public void jobIntentService(View view) {
+        startActivity(new Intent(this, JobIntentServiceActivity.class));
+    }
 }

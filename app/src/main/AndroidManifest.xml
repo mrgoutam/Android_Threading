@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".service_background.IntentServiceActivity"/>
+        <activity android:name=".service_background.JobIntentServiceActivity"/>
+        <activity android:name=".service_background.IntentServiceActivity" />
         <activity android:name=".service_background.ForegroundServiceActivity" />
         <activity android:name=".service_background.ServicesAndBackgroundActivity" />
         <activity android:name=".service_background.JobServiceActivity" />
@@ -34,7 +35,10 @@
             android:name=".service_background.ExampleJobService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
         <service android:name=".service_background.ExamplService" />
-        <service android:name=".service_background.ExampleIntentService"/>
+        <service android:name=".service_background.ExampleIntentService" />
+        <service
+            android:name=".service_background.ExampleJobIntentService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
     </application>
 
 </manifest>
