@@ -7,7 +7,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context="com.stark.threading.service_background.ForgroundServiceActivity">
+    tools:context="com.stark.threading.service_background.ForegroundServiceActivity">
 
     <EditText
         android:id="@+id/edit_text_input"

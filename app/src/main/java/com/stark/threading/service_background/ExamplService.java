@@ -23,7 +23,7 @@ public class ExamplService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         String input = intent.getStringExtra("inputExtra");
-        Intent notificationIntent = new Intent(this, ForgroundServiceActivity.class);
+        Intent notificationIntent = new Intent(this, ForegroundServiceActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,
                 0, notificationIntent, 0);
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)

@@ -14,11 +14,16 @@
         android:text="Services and Background Task"
         android:textAllCaps="false"
         android:onClick="jobService"/>
-
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Forground Service(with Notification Channel)"
         android:textAllCaps="false"
-        android:onClick="forgroundService"/>
+        android:onClick="foregroundService"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Intent Service"
+        android:textAllCaps="false"
+        android:onClick="intentService"/>
 </LinearLayout>

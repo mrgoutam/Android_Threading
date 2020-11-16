@@ -10,12 +10,13 @@ import android.widget.EditText;
 
 import com.stark.threading.R;
 
-public class ForgroundServiceActivity extends AppCompatActivity {
+public class ForegroundServiceActivity extends AppCompatActivity {
     private EditText editTextInput;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_forground_service);
+        setContentView(R.layout.activity_foreground_service);
+        setTitle("Foreground Service");
         editTextInput = findViewById(R.id.edit_text_input);
     }
     public void startService(View v) {
